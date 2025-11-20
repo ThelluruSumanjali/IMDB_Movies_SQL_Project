@@ -1,8 +1,3 @@
-Here is a clean, professional **README description** you can upload to GitHub for your IMDB Movie Analytics project.
-(You can copy-paste directly into your README.md.)
-
----
-
 # 📊 IMDB Movie Analytics – SQL & Power BI Project
 
 This project delivers an end-to-end data analysis workflow using **MySQL** for data extraction & processing and **Power BI** for interactive visualizations. The objective is to analyze the **IMDB Movies Dataset** to uncover insights about directors, movie performance, revenues, audience engagement, and industry patterns.
