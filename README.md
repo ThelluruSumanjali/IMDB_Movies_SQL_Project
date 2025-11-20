@@ -1,10 +1,14 @@
+# IMDB_MOVIES_SQL_PROJECT
+
 ## Project Overview 
 This project focuses on analyzing data from the **IMDB Movies Dataset** using **SQL** for data 
 extraction, transformation and analysis, and **Power BI** for interactive visualization. The 
 goal of the project is to extract meaningful insights about movie performance, director 
 information, **revenues, popularity trends, and industry patterns** using structured queries 
 and rich visual dashboards. 
- 
+
+---
+
 ## Dataset Description 
 **Directors Table** 
 This table contains information about movie directors. 
@@ -33,15 +37,19 @@ This table contains information about movies.
 **UID** Unique ID for movies 
 **Director ID** ID of the director of the movie 
 Total rows in Movies table: **47 movies.** 
- 
+
+ ---
+
 ## Technology Stack 
 **• Database:** MySQL Server 
 **• BI & Analytics:** Power BI Desktop 
 **• Languages:** SQL (for data processing), DAX (for analysis & measures) 
 **• Supporting Tools:** MySQL Workbench (database management), MS Excel (initial 
 data review) 
- 
- ## Data Preparation  
+
+---
+
+## Data Preparation  
 **Database Creation & Table Setup**  
 • Created a database: IMDB Movies 
 • Imported Directors.csv & Movies.csv using LOAD DATA LOCAL INFILE 
@@ -57,6 +65,8 @@ range to confirm data completeness.
 • This table served as the primary source for advanced SQL analysis and Power BI 
 dashboards. 
 
+---
+
 ## Exploratory Data Analysis (EDA) 
 A preliminary exploration was conducted to understand data structure and quality: 
 • Reviewed the structure and row counts of both the **Movies** and **Directors** tables. 
@@ -69,79 +79,89 @@ which was later handled in Power BI.
 • Observed general distributions of **popularity, vote averages, votes,** and **revenues.** 
 • Ensured the correctness of movie–director mapping using the **director id** field. 
 • Confirmed that the dataset was clean, complete, and ready for SQL-based analysis. 
- 
+
+---
+
  ## SQL Analysis Performed 
 The following analytical questions were solved using SQL queries on the dataset: 
 a) Can you get all data about movies?  
 **SELECT * FROM movies_directors;** 
+
 b) How do you get all data about directors? 
-**SELECT * FROM movies_directors;**            
+**SELECT * FROM movies_directors;**  
+
 c) Check how many movies are present in IMDB. 
-**SELECT count (*) as No_of_movies FROM movies;** 
+**SELECT count (*) as No_of_movies FROM movies;**
+
 d) Find these 3 directors: James Cameron; Luc Besson; John Woo 
 **SELECT * FROM directors WHERE name IN ('James Cameron', 'Luc Besson', 'John Woo');** 
+
 e) Find all directors with name starting with S. 
 **select name from directors where name like "s%";** 
+
 f) Count female directors. 
 **select count(*) AS No_of_female_directors from directors where gender = 1;** 
+
 g) Find the name of the 10th first women directors? 
 **SELECT * FROM directors WHERE gender = 1 ORDER BY id limit 1 OFFSET 9;** 
+
 h) What are the 3 most popular movies? 
-select *  
+**select *  
 from movies  
 order by popularity  
-desc limit 3; 
+desc limit 3;** 
  
 i) What are the 3 most bankable movies? 
-select *  
+**select *  
 from movies  
 order by revenue desc  
-limit 3; 
+limit 3;** 
  
 j) What is the most awarded average vote since the January 1st, 2000? 
-SELECT title, vote_average, release_date, vote_count 
+**SELECT title, vote_average, release_date, vote_count 
 FROM movies 
 WHERE release_date >= '2000-01-01' 
 ORDER BY vote_average DESC, vote_count desc, release_date 
-limit 5; 
+limit 5;**
  
 k) Which movie(s) were directed by Brenda Chapman? 
-select *  
+**select *  
 from movies_directors 
-where director_name ="Brenda Chapman"; 
+where director_name ="Brenda Chapman";**
  
 l) Which director made the most movies? 
-SELECT director_name, COUNT(*) AS No_of_Movies 
+**SELECT director_name, COUNT(*) AS No_of_Movies 
 FROM movies_directors 
 GROUP BY director_name 
 ORDER BY No_of_Movies DESC 
-limit 5; 
- 
-5 
- 
- 
+limit 5;** 
+
 m) Which director is the most bankable? 
-select director_name, sum(revenue) as total_revenue 
+**select director_name, sum(revenue) as total_revenue 
 FROM movies_directors 
 group by director_name 
 order by total_revenue desc 
-limit 5; 
+limit 5;**
+
 These queries helped understand the relationships and performance metrics across the 
-dataset. 
- 
-7. Power BI Analysis & Visualizations 
+dataset.
+
+**Power BI Analysis & Visualizations** 
 After SQL analysis, the dataset was imported into Power BI Desktop for further 
-transformation, modeling, and interactive visualization. 
-7.1 Power Query Transformations 
+transformation, modeling, and interactive visualization.
+
+**Power Query Transformations** 
 • Verified and corrected data types for numeric, text, and date fields. 
 • Created a gender label column (Male / Female / Unknown) based on the gender 
 codes. 
 • Checked for data quality issues and handled one null value in the tagline column. 
 • Ensured all fields were error-free before loading the data into the report view. 
-7.2 Data Modeling 
+
+**Data Modeling** 
 • Directors Table was linked with Movies Table using the ID column (one-to-many 
-relationship). 
-7.3 Measures Created in Power BI 
+relationship).
+
+**Measures Created in Power BI**
 Some custom DAX measures created include: 
 Profit 
 Profit = SUM(Movies[Revenue]) - SUM(Movies[Budget]) 
@@ -151,14 +171,13 @@ DIVIDE(
     SUM(Movies[Revenue]) - SUM(Movies[Budget]), 
     SUM(Movies[Budget]) 
 )  
-These measures helped analyze business performance of each movie. 
- 
-6 
- 
-7.4. Power BI Dashboard Overview  
-7 
- 
-7.5. Power BI Visuals Used 
+These measures helped analyze business performance of each movie.
+
+**Power BI Dashboard Overview** 
+<img width="794" height="482" alt="image" src="https://github.com/user-attachments/assets/9f5f125e-d05b-4034-a422-6b8a043557cd" />
+<img width="791" height="467" alt="image" src="https://github.com/user-attachments/assets/33b5cd8a-2348-4cb8-ae06-bab1337c1836" />
+
+**Power BI Visuals Used** 
 Below are the visuals used in the IMDB project: 
 • Table Visuals: No of Movies directed by a specific director, Average movie rating 
 per director 
@@ -169,10 +188,12 @@ Movies, Most Profitable movies, Budget vs Revenue Comparison
 • Line Chart: Movies released per year 
 • Donut Chart: Top Movies by Votes 
 • Filters / Slicers: Movie title, Year, Clear all slicers 
- 
-8. Project Insights 
+
+---
+
+## Project Insights 
 Some key insights derived include: 
-8.1           Movie Performance & Audience Behavior 
+ **Movie Performance & Audience Behavior** 
 • Popularity and revenue show a strong positive correlation—movies with higher 
 popularity scores tend to generate significantly higher revenue, indicating the 
 commercial impact of audience interest. 
@@ -184,33 +205,36 @@ consistent audience ratings.
 • Movies released after 2000 show stronger audience engagement, with many films 
 achieving high ratings and large vote counts. 
 • There is a clear correlation between vote count and vote average, indicating that 
-movies with wider audience reach often secure better ratings. 
-8.2     Director-Level Insights 
+movies with wider audience reach often secure better ratings.
+
+**Director-Level Insights**
 • James Cameron emerged as the most bankable director with extremely high 
 revenue figures. 
 • A select group of directors generated the highest cumulative revenues, 
 demonstrating their strong influence on commercial success. 
-8 
- 
 • The number of female directors is significantly lower, indicating a skewed gender 
 representation. 
 • Director productivity varied widely—some delivered multiple films while others 
 contributed only a single title. 
 • Several directors with fewer movies still achieved high average ratings, proving that 
 output quantity does not always reflect audience approval. 
-8.3   Financial & Profitability Insights 
+
+**Financial & Profitability Insights** 
 • Profit analysis revealed that high budgets do not always result in high profitability; 
 some lower-budget films delivered strong profit margins. 
 • Directors with consistent revenue-generating movies delivered high profitability 
 across their filmography, demonstrating stable box office performance. 
-8.4    Trend & Distribution Patterns 
+
+**Trend & Distribution Patterns** 
 • Revenue, popularity, and vote metrics displayed wide variability, indicating that only 
 a limited number of movies achieve exceptional commercial and audience 
 success. 
 • Year-wise trends showed a significant concentration of movie releases and 
 audience activity in the 2010–2016 period, marking a high-growth era. 
- 
-9. Recommendations 
+
+---
+
+## Recommendations 
 Based on the insights from SQL and Power BI, the following recommendations can guide 
 better decisions for the movie industry: 
 • Prioritize films with rising popularity, as popularity strongly correlates with 
@@ -225,7 +249,9 @@ higher profitability.
 underrepresentation of female directors. 
 • Continue monitoring year-wise performance trends, especially during high
 activity periods (2010–2017), to refine release strategies. 
- 
+
+---
+
 ## Conclusion 
 This project demonstrated a complete end-to-end analytics workflow by combining SQL 
 for data preparation and querying with Power BI for interactive visualization. The IMDB 
@@ -234,4 +260,6 @@ relationships, SQL joins, DAX measures, and dashboard design. The analysis revea
 meaningful insights into movie performance, audience engagement, director productivity, 
 and revenue trends. Overall, the project highlights how structured data processing and 
 business intelligence tools work together to convert raw data into clear, actionable insights 
-that support informed decision-making. 
+that support informed decision-making.
+
+**© 2025 S. Asmita & T. Sumanjali — Created under Datamites. All Rights Reserved.**
